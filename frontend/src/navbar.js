@@ -251,14 +251,14 @@ interface NavItem {
 const NAV_ITEMS: Array<NavItem> = [
   {
     label: 'Home',
-    href: '#',
+    href: '/',
   },
   {
     label: 'Nonprofits',
-    href: '#',
+    href: '/view',
   },
   {
     label: 'About Us',
-    href: '#',
+    href: '/about',
   },
 ];
