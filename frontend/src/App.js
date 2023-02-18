@@ -2,6 +2,7 @@ import * as React from 'react'
 import SplitScreen from './splitScreen'
 import CallToActionWithIllustration from './illustrationCTA'
 import Navbar from './navbar'
+import Footer from './footer'
 
 // 1. import `ChakraProvider` component
 import { ChakraProvider } from '@chakra-ui/react'
@@ -12,6 +13,7 @@ function App() {
     <ChakraProvider>
       <Navbar />
       <CallToActionWithIllustration />
+      <Footer />
     </ChakraProvider>
   )
 }
