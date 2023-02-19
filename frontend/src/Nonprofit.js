@@ -7,17 +7,21 @@ import {
   Stack,
   Badge,
   Link,
-  Image,
+  Flex,
   useColorModeValue,
+  Button,
 } from "@chakra-ui/react";
 
 export default function Nonprofit(props) {
   const { name, website, image, description, tags } = props.info;
   const colorValue = useColorModeValue("gray.50", "gray.800");
   return (
-    <Card width={"100%"} padding={"2em"}>
+    <Card width={"100%"} px={"0.8em"} pb={"1em"} pt={"0.5em"}>
       <CardHeader>
-        <Heading size="md">{name}</Heading>
+        <Flex flexDir={"row"} justify={"space-between"} alignItems={"center"}>
+          <Heading size="md">{name}</Heading>
+          <Button colorScheme={"blue"}>Donate</Button>
+        </Flex>
       </CardHeader>
       <CardBody>
         <Stack direction={"column"} gap={"2"}>

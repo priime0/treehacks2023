@@ -41,7 +41,8 @@ export default function ProductSimple() {
   return (
     <Center py={12}>
       <Flex flexDir={"column"}>
-        <Heading pb={8}>Leaderboard</Heading>
+        <Heading pb={4}>Leaderboard</Heading>
+        <Text pb={8}>Here are our top donators across the globe! ✨✨</Text>
         <Stack maxW={"3xl"} minW={"xl"}>
           {donations
             .filter((donation) => donation[1] !== 0)
