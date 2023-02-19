@@ -123,4 +123,19 @@ async function getUser() {
   }
 }
 
-export { getNonprofits, getEmail, signup, login, logout, getUser };
+async function getUsers() {
+  const path = "/user/all";
+  const url = BASE_URL + path;
+  try {
+    const response = await fetch(url);
+    if (response.status !== 200) {
+      return {};
+    }
+    const result = await response.json();
+    return result;
+  } catch (e) {
+    return {};
+  }
+}
+
+export { getNonprofits, getEmail, signup, login, logout, getUser, getUsers };
