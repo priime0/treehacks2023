@@ -15,15 +15,16 @@ export default function SocialProfileSimple() {
   return (
     <Center py={6}>
       <Box
-        maxW={'320px'}
+        maxW={'540px'}
+        minH={'580px'}
         w={'full'}
         bg={useColorModeValue('white', 'gray.900')}
         boxShadow={'2xl'}
-        rounded={'lg'}
+        rounded={'xl'}
         p={6}
         textAlign={'center'}>
         <Avatar
-          size={'xl'}
+          size={'x2'}
           src={
             'https://images.unsplash.com/photo-1520810627419-35e362c5dc07?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ'
           }
@@ -83,7 +84,7 @@ export default function SocialProfileSimple() {
           </Badge>
         </Stack>
 
-        <Stack mt={8} direction={'row'} spacing={4}>
+        <Stack mt={16} direction={'row'} spacing={4}>
           <Button
             flex={1}
             fontSize={'sm'}
