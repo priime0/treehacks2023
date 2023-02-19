@@ -16,8 +16,8 @@ export default function ViewNonprofitsPage() {
     <Stack>
       <Navbar />
       <Center>
-        <Input placeholder="Search for nonprofit organizations" tmlSize={4} width='1000px' borderRadius="16px" />
-      </Center>
+        <Input placeholder="🔍 Search for nonprofit organizations" tmlSize={4} width='1000px' borderRadius="16px" />
+     </Center>
       <Center paddingY={"2em"} backgroundColor={"#F7F7FA"}>
         <Stack dir={"column"} maxW={"3xl"} width={"100%"} marginX={"auto"} gap={"2em"}>
           {nonprofits.map((nonprofit) => {
