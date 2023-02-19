@@ -68,7 +68,7 @@ export default function blogPostWithImage() {
           />
           <Stack direction={'column'} spacing={0} fontSize={'sm'}>
             <Text fontWeight={600}>The WasteNot Team</Text>
-            <Text color={'gray.500'}>Feb 20, 2022 · 6min read</Text>
+            <Text color={'gray.500'}>Feb 19, 2022 · 6min read</Text>
           </Stack>
         </Stack>
       </Box>
