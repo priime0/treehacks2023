@@ -45,7 +45,7 @@ import {
                 </Avatar>
               </Center>
               <Center w="full">
-                <Button w="full">Change Icon</Button>
+                <Button w="full">Edit Profile</Button>
               </Center>
             </Stack>
           </FormControl>
