@@ -6,13 +6,14 @@ import App from "./App";
 import ViewNonprofitsPage from "./ViewNonprofitsPage.js";
 import ViewProfilePage from "./ViewProfilePage.js";
 import About from "./About.js";
-import SigninPage from './signInPage.js'
-import SignupPage from './signUpPage.js'
+import SigninPage from "./signInPage.js";
+import SignupPage from "./signUpPage.js";
 import Donate from "./Donate";
-import EditProfilePage from './EditProfilePage.js'
+import EditProfilePage from "./EditProfilePage.js";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ChakraProvider } from "@chakra-ui/react";
-import Leaderboard from './leaderboardPage.js'
+import Leaderboard from "./leaderboardPage.js";
+import Match from "./Match";
 
 const router = createBrowserRouter([
   {
@@ -29,28 +30,32 @@ const router = createBrowserRouter([
   },
   {
     path: "/about",
-    element: <About />
+    element: <About />,
   },
   {
     path: "/login",
-    element: <SigninPage />
+    element: <SigninPage />,
   },
   {
     path: "/register",
-    element: <SignupPage />
+    element: <SignupPage />,
   },
   {
     path: "/editProfile",
-    element: <EditProfilePage />
+    element: <EditProfilePage />,
   },
   {
     path: "/leaderboard",
-    element: <Leaderboard />
+    element: <Leaderboard />,
   },
   {
     path: "/donate/:uuid",
-    element: <Donate/>
-  }
+    element: <Donate />,
+  },
+  {
+    path: "/match",
+    element: <Match />,
+  },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
