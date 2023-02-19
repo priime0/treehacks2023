@@ -85,10 +85,10 @@ async def user_signup(info: Request):
     for rqk in required_keys:
         if rqk not in info:
             raise HTTPException(status_code=400, detail=f"Missing key {rqk}")
-    first_name = required_keys["firstName"]
-    last_name = required_keys["lastName"]
-    email = required_keys["email"]
-    password = required_keys["password"]
+    first_name = info["firstName"]
+    last_name = info["lastName"]
+    email = info["email"]
+    password = info["password"]
 
     if email in db["users"]:
         raise HTTPException(status_code=400, detail=f"Email {email} already registered")
@@ -109,15 +109,16 @@ async def user_login(info: Request):
     required_keys = ["email", "password"]
     for rqk in required_keys:
         if rqk not in info:
+            print("Missing key")
             raise HTTPException(status_code=400, detail=f"Missing key {rqk}")
 
-    email = required_keys["email"]
-    password = required_keys["password"]
+    email = info["email"]
+    password = info["password"]
 
     if email not in db["users"]:
         raise HTTPException(status_code=400, detail="Incorrect login!")
 
-    if db["users"]["email"] != password:
+    if db["users"][email]["password"] != password:
         raise HTTPException(status_code=400, detail="Incorrect login!")
 
     return {"email", email}
