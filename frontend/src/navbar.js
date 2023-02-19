@@ -68,7 +68,7 @@ export default function WithSubnavigation() {
           </Flex>
         </Flex>
 
-        {email === "" ? (
+        {email === undefined || email === "" || email === "undefined" ? (
           <Stack
             flex={{ base: 1, md: 0 }}
             justify={"flex-end"}

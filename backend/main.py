@@ -122,3 +122,10 @@ async def user_login(info: Request):
         raise HTTPException(status_code=400, detail="Incorrect login!")
 
     return {"email", email}
+
+@app.get("/user/get/{email}", status_code=200)
+async def get_user(email):
+    if email not in db["users"]:
+        raise HTTPException(status_code=400, detail="Nonexistent user")
+
+    return db["users"][email]

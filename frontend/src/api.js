@@ -24,6 +24,10 @@ function getEmail() {
     return "";
   }
 
+  if (cookieValue === undefined) {
+    return "";
+  }
+
   return cookieValue;
 }
 
@@ -90,4 +94,31 @@ function logout() {
   unsetEmail();
 }
 
-export { getNonprofits, getEmail, signup, login, logout };
+async function getUser() {
+  const email = getEmail();
+  const path = `/user/get/${email}`;
+  const url = BASE_URL + path;
+  try {
+    const response = await fetch(url);
+    if (response.status !== 200) {
+      return {
+        firstName: "",
+        lastName: "",
+        email: "",
+        password: "",
+      };
+    }
+    const result = await response.json();
+    return result;
+  } catch (e) {
+    console.error(e);
+    return {
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+    };
+  }
+}
+
+export { getNonprofits, getEmail, signup, login, logout, getUser };
