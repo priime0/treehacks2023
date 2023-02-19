@@ -71,7 +71,7 @@ export default function WithSubnavigation() {
             fontSize={'sm'}
             fontWeight={400}
             variant={'link'}
-            href={'#'}>
+            href={'/Profile'}>
             Sign In
           </Button>
           <Button
