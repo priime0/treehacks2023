@@ -11,6 +11,7 @@ import SignupPage from './signUpPage.js'
 import EditProfilePage from './EditProfilePage.js'
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ChakraProvider } from "@chakra-ui/react";
+import Leaderboard from './leaderboardPage.js'
 
 const router = createBrowserRouter([
   {
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
   {
     path: "/editProfile",
     element: <EditProfilePage />
+  },
+  {
+    path: "/leaderboard",
+    element: <Leaderboard />
   }
 ]);
 

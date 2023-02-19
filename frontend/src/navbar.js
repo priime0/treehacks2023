@@ -292,4 +292,8 @@ const NAV_ITEMS: Array<NavItem> = [
     label: "About Us",
     href: "/about",
   },
+  {
+    label: "Leaderboard",
+    href: "/leaderboard",
+  },
 ];
