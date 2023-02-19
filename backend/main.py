@@ -14,6 +14,18 @@ app.add_middleware(
 )
 
 db["users"] = dict()
+db["users"]["test"] = {
+    "first_name": "test",
+    "last_name": "test",
+    "email": "test",
+    "password": "test",
+    "donations": [
+        ("Khan Academy", 100),
+        ("Chan Zuckerberg Initiative", 250),
+        ("Amnesty International", 150),
+    ],
+}
+
 db["nonprofits"] = [
     {
         "name": "Khan Academy",
@@ -170,6 +182,7 @@ async def user_signup(info: Request):
         "last_name": last_name,
         "email": email,
         "password": password,
+        "donations": list(),
     }
 
     return {"email": email}

@@ -13,10 +13,12 @@ import {
 import { useEffect, useState } from "react";
 import { getUser, getEmail, logout } from "./api";
 import { useNavigate } from "react-router-dom";
+import Donation from "./Donation";
 
 export default function SocialProfileSimple() {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
+  const [donations, setDonations] = useState([]);
   const storedEmail = getEmail();
   const navigate = useNavigate();
 
@@ -31,8 +33,10 @@ export default function SocialProfileSimple() {
   useEffect(() => {
     getUser().then((info) => {
       const name = `${info.first_name} ${info.last_name}`;
+      info.donations.sort((a, b) => b[1] - a[1]);
       setFullName(name);
       setEmail(info.email);
+      setDonations(info.donations);
     });
   }, []);
 
@@ -78,56 +82,73 @@ export default function SocialProfileSimple() {
         <Text fontWeight={600} color={"gray.500"} mb={4}>
           {email}
         </Text>
+        <Text>
+          <Text as="b">Total Donations:</Text> $
+          {donations.reduce((t, x) => x[1] + t, 0)}
+        </Text>
 
-        <Stack align={'center'} justify={'center'} direction={'row'} mt={6}>
+        <Stack py={2} gap={2}>
+          {donations.map(donation => <Donation name={donation[0]} amount={donation[1]}/>)}
+        </Stack>
+
+        <Stack align={"center"} justify={"center"} direction={"row"} mt={6}>
           <Badge
             px={2}
             py={1}
-            bg={useColorModeValue('gray.50', 'gray.800')}
-            fontWeight={'400'}>
+            bg={useColorModeValue("gray.50", "gray.800")}
+            fontWeight={"400"}
+          >
             #art
           </Badge>
           <Badge
             px={2}
             py={1}
-            bg={useColorModeValue('gray.50', 'gray.800')}
-            fontWeight={'400'}>
+            bg={useColorModeValue("gray.50", "gray.800")}
+            fontWeight={"400"}
+          >
             #photography
           </Badge>
           <Badge
             px={2}
             py={1}
-            bg={useColorModeValue('gray.50', 'gray.800')}
-            fontWeight={'400'}>
+            bg={useColorModeValue("gray.50", "gray.800")}
+            fontWeight={"400"}
+          >
             #music
           </Badge>
         </Stack>
 
         <Stack mt={16} direction={"row"} spacing={4}>
-          <Button flex={1} fontSize={"sm"} rounded={"full"} colorScheme={"red"} onClick={handleLogout}>
+          <Button
+            flex={1}
+            fontSize={"sm"}
+            rounded={"full"}
+            colorScheme={"red"}
+            onClick={handleLogout}
+          >
             Log out
           </Button>
           <Button
             flex={1}
-            fontSize={'sm'}
-            rounded={'full'}
-            bg={'blue.400'}
-            color={'white'}
+            fontSize={"sm"}
+            rounded={"full"}
+            bg={"blue.400"}
+            color={"white"}
             onClick={() => navigate("/editProfile")}
             boxShadow={
-              '0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)'
+              "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
             }
             _hover={{
-              bg: 'blue.500',
+              bg: "blue.500",
             }}
             _focus={{
-              bg: 'blue.500',
-            }}>
+              bg: "blue.500",
+            }}
+          >
             Edit Profile
-        
-            </Button>
-          </Stack>
-        </Box>
-      </Center>
-    );
-  }
+          </Button>
+        </Stack>
+      </Box>
+    </Center>
+  );
+}

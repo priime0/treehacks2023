@@ -106,6 +106,7 @@ async function getUser() {
         lastName: "",
         email: "",
         password: "",
+        donations: []
       };
     }
     const result = await response.json();
@@ -117,6 +118,7 @@ async function getUser() {
       lastName: "",
       email: "",
       password: "",
+      donations: []
     };
   }
 }
