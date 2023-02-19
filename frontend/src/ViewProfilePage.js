@@ -32,22 +32,13 @@ import {
           p={6}
           my={12}>
           <Heading lineHeight={1.1} fontSize={{ base: '2xl', sm: '3xl' }}>
-            User Profile Edit
+            Your Profile
           </Heading>
           <FormControl id="userName">
             <FormLabel>User Icon</FormLabel>
             <Stack direction={['column', 'row']} spacing={6}>
               <Center>
                 <Avatar size="xl" src="https://bit.ly/sage-adebayo">
-                  <AvatarBadge
-                    as={IconButton}
-                    size="sm"
-                    rounded="full"
-                    top="-10px"
-                    colorScheme="red"
-                    aria-label="remove Image"
-                    icon={<SmallCloseIcon />}
-                  />
                 </Avatar>
               </Center>
               <Center w="full">
@@ -84,19 +75,11 @@ import {
               bg={'red.400'}
               color={'white'}
               w="full"
+              href={'#'}
               _hover={{
                 bg: 'red.500',
               }}>
-              Cancel
-            </Button>
-            <Button
-              bg={'blue.400'}
-              color={'white'}
-              w="full"
-              _hover={{
-                bg: 'blue.500',
-              }}>
-              Submit
+              Back
             </Button>
           </Stack>
         </Stack>
