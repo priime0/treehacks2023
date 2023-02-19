@@ -54,7 +54,7 @@ import {
           spacing={4}
           justify={{ base: 'center', md: 'space-between' }}
           align={{ base: 'center', md: 'center' }}>
-          <Text>© 2022 WasteNot. All rights reserved. Chakra Templates.</Text>
+          <Text>© 2022 GiveBack. All rights reserved. Chakra Templates.</Text>
           <Stack direction={'row'} spacing={6}>
             <SocialButton label={'Twitter'} href={'#'}>
               <FaTwitter />
