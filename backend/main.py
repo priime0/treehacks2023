@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from typing import *
 
@@ -13,6 +13,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+db["users"] = dict()
 db["nonprofits"] = [
     {
         "name": "Khan Academy",
@@ -75,3 +76,48 @@ def read_root():
 @app.get("/nonprofit/all")
 def get_nonprofits():
     return {"nonprofits": db["nonprofits"]}
+
+
+@app.post("/user/signup", status_code=200)
+async def user_signup(info: Request):
+    info = await info.json()
+    required_keys = ["firstName", "lastName", "email", "password"]
+    for rqk in required_keys:
+        if rqk not in info:
+            raise HTTPException(status_code=400, detail=f"Missing key {rqk}")
+    first_name = required_keys["firstName"]
+    last_name = required_keys["lastName"]
+    email = required_keys["email"]
+    password = required_keys["password"]
+
+    if email in db["users"]:
+        raise HTTPException(status_code=400, detail=f"Email {email} already registered")
+
+    db["users"][email] = {
+        "first_name": first_name,
+        "last_name": last_name,
+        "email": email,
+        "password": password,
+    }
+
+    return {"email": email}
+
+
+@app.post("/user/login", status_code=200)
+async def user_login(info: Request):
+    info = await info.json()
+    required_keys = ["email", "password"]
+    for rqk in required_keys:
+        if rqk not in info:
+            raise HTTPException(status_code=400, detail=f"Missing key {rqk}")
+
+    email = required_keys["email"]
+    password = required_keys["password"]
+
+    if email not in db["users"]:
+        raise HTTPException(status_code=400, detail="Incorrect login!")
+
+    if db["users"]["email"] != password:
+        raise HTTPException(status_code=400, detail="Incorrect login!")
+
+    return {"email", email}
