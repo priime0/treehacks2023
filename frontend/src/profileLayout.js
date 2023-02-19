@@ -9,57 +9,74 @@ import {
   Link,
   Badge,
   useColorModeValue,
-} from '@chakra-ui/react';
+} from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+import { getUser, getEmail, logout } from "./api";
 import { useNavigate } from "react-router-dom";
 
 export default function SocialProfileSimple() {
-    const navigate = useNavigate();
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const storedEmail = getEmail();
+  const navigate = useNavigate();
+
+  if (
+    storedEmail === "" ||
+    storedEmail === "undefined" ||
+    storedEmail === undefined
+  ) {
+    navigate("/login");
+  }
+
+  useEffect(() => {
+    getUser().then((info) => {
+      const name = `${info.first_name} ${info.last_name}`;
+      setFullName(name);
+      setEmail(info.email);
+    });
+  }, []);
+
+  function handleLogout() {
+    logout();
+    navigate("/");
+  }
+
   return (
     <Center py={6}>
       <Box
-        maxW={'540px'}
-        minH={'580px'}
-        w={'full'}
-        bg={useColorModeValue('white', 'gray.900')}
-        boxShadow={'2xl'}
-        rounded={'xl'}
+        maxW={"540px"}
+        w={"full"}
+        bg={useColorModeValue("white", "gray.900")}
+        boxShadow={"2xl"}
+        rounded={"xl"}
         p={6}
-        textAlign={'center'}>
+        textAlign={"center"}
+      >
         <Avatar
-          size={'x2'}
+          size={"x2"}
           src={
-            'https://images.unsplash.com/photo-1520810627419-35e362c5dc07?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ'
+            "https://images.unsplash.com/photo-1520810627419-35e362c5dc07?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
           }
-          alt={'Avatar Alt'}
+          alt={"Avatar Alt"}
           mb={4}
-          pos={'relative'}
+          pos={"relative"}
           _after={{
             content: '""',
             w: 4,
             h: 4,
-            bg: 'green.300',
-            border: '2px solid white',
-            rounded: 'full',
-            pos: 'absolute',
+            bg: "green.300",
+            border: "2px solid white",
+            rounded: "full",
+            pos: "absolute",
             bottom: 0,
             right: 3,
           }}
         />
-        <Heading fontSize={'2xl'} fontFamily={'body'}>
-          Ashley Adams
+        <Heading fontSize={"2xl"} fontFamily={"body"}>
+          {fullName}
         </Heading>
-        <Text fontWeight={600} color={'gray.500'} mb={4}>
-          @ashley_adams
-        </Text>
-        <Text
-          textAlign={'center'}
-          color={useColorModeValue('gray.700', 'gray.400')}
-          px={3}>
-          Actress, musician, songwriter and artist. PM for work inquires or{' '}
-          <Link href={'#'} color={'blue.400'}>
-            #tag
-          </Link>{' '}
-          me in your posts
+        <Text fontWeight={600} color={"gray.500"} mb={4}>
+          {email}
         </Text>
 
         <Stack align={'center'} justify={'center'} direction={'row'} mt={6}>
@@ -86,15 +103,9 @@ export default function SocialProfileSimple() {
           </Badge>
         </Stack>
 
-        <Stack mt={16} direction={'row'} spacing={4}>
-          <Button
-            flex={1}
-            fontSize={'sm'}
-            rounded={'full'}
-            _focus={{
-              bg: 'gray.200',
-            }}>
-            Back
+        <Stack mt={16} direction={"row"} spacing={4}>
+          <Button flex={1} fontSize={"sm"} rounded={"full"} colorScheme={"red"} onClick={handleLogout}>
+            Log out
           </Button>
           <Button
             flex={1}
@@ -113,9 +124,10 @@ export default function SocialProfileSimple() {
               bg: 'blue.500',
             }}>
             Edit Profile
-          </Button>
-        </Stack>
-      </Box>
-    </Center>
-  );
-}
+        
+            </Button>
+          </Stack>
+        </Box>
+      </Center>
+    );
+  }
