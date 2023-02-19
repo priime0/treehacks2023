@@ -4,7 +4,11 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import App from "./App";
 import ViewNonprofitsPage from "./ViewNonprofitsPage.js";
+<<<<<<< HEAD
 import ViewProfilePage from "./ViewProfilePage.js";
+=======
+import About from "./About.js";
+>>>>>>> 06a476600e1a418b01769f7af704fd459a0c4386
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ChakraProvider } from "@chakra-ui/react";
 
@@ -18,9 +22,15 @@ const router = createBrowserRouter([
     element: <ViewNonprofitsPage />,
   },
   {
+<<<<<<< HEAD
     path: "/profile",
     element: <ViewProfilePage />,
   },
+=======
+    path: "/about",
+    element: <About />
+  }
+>>>>>>> 06a476600e1a418b01769f7af704fd459a0c4386
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
