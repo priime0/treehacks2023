@@ -2,6 +2,9 @@ from fastapi import FastAPI, Request, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from typing import *
 from db import db
+from collections import Counter
+import re
+import spacy
 
 app = FastAPI()
 
@@ -13,6 +16,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+nlp = spacy.load("en_core_web_sm")
 
 @app.get("/")
 def read_root():
@@ -111,11 +115,13 @@ async def donate(request: Request):
 
     nps = [np["name"] for np in db["nonprofits"] if np["uuid"] == uuid]
     if len(nps) == 0:
-        raise HTTPException(status_code=400, detail=f"nonprofit with uuid {uuid} not found")
+        raise HTTPException(
+            status_code=400, detail=f"nonprofit with uuid {uuid} not found"
+        )
     npname = nps[0]
 
     donations = db["users"][email]["donations"]
-    
+
     donated = False
     for i, (name, val) in enumerate(donations):
         if name == npname:
@@ -124,3 +130,32 @@ async def donate(request: Request):
         db["users"][email]["donations"].append((name, amount))
 
     return 200
+
+
+@app.post("/match", status_code=200)
+async def match(request: Request):
+    info = await request.json()
+    if "description" not in info:
+        raise HTTPException(status_code=400, detail="description key not present")
+
+    description = info["description"]
+
+    main_doc = nlp(description)
+
+    best_index = 0
+    best_score = 0
+
+    for i, nonprofit in enumerate(list(db["nonprofits"])):
+        npdescription = nonprofit["description"]
+
+        npdoc = nlp(npdescription)
+
+        sim_score = main_doc.similarity(npdoc)
+
+        if sim_score > best_score:
+            best_index = i
+            best_score = sim_score
+
+    best_nonprofit = db["nonprofits"][best_index]
+
+    return best_nonprofit

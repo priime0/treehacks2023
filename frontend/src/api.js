@@ -176,6 +176,27 @@ async function donate(email, uuid, amount) {
   }
 }
 
+async function match(description) {
+  const path = "/match";
+  const url = BASE_URL + path;
+  const data = {
+    description,
+  };
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    const result = await response.json();
+    return result;
+  } catch (e) {
+    return null;
+  }
+}
+
 export {
   getNonprofits,
   getEmail,
@@ -186,4 +207,5 @@ export {
   getUsers,
   getNonprofit,
   donate,
+  match,
 };
