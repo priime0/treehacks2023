@@ -22,7 +22,7 @@ export default function Match() {
   const toast = useToast();
 
   async function handleMatch() {
-    if (description.length <= 100) {
+    if (description.length <= 5) {
       toast({
         title: "Description!",
         description: "Please type more about what you're looking for",
