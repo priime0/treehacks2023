@@ -8,6 +8,7 @@ import ViewProfilePage from "./ViewProfilePage.js";
 import About from "./About.js";
 import SigninPage from './signInPage.js'
 import SignupPage from './signUpPage.js'
+import Donate from "./Donate";
 import EditProfilePage from './EditProfilePage.js'
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ChakraProvider } from "@chakra-ui/react";
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
   {
     path: "/leaderboard",
     element: <Leaderboard />
+  },
+  {
+    path: "/donate/:uuid",
+    element: <Donate/>
   }
 ]);
 

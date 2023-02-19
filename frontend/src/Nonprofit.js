@@ -11,16 +11,24 @@ import {
   useColorModeValue,
   Button,
 } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 
 export default function Nonprofit(props) {
-  const { name, website, image, description, tags } = props.info;
+  const navigate = useNavigate();
+  const { name, uuid, website, image, description, tags } = props.info;
   const colorValue = useColorModeValue("gray.50", "gray.800");
+
+  function handleRedirect() {
+    const target = `/donate/${uuid}`;
+    navigate(target);
+  }
+
   return (
     <Card width={"100%"} px={"0.8em"} pb={"1em"} pt={"0.5em"}>
       <CardHeader>
         <Flex flexDir={"row"} justify={"space-between"} alignItems={"center"}>
           <Heading size="md">{name}</Heading>
-          <Button colorScheme={"blue"}>Donate</Button>
+          <Button colorScheme={"blue"} onClick={handleRedirect}>Donate</Button>
         </Flex>
       </CardHeader>
       <CardBody>

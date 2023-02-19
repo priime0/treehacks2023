@@ -106,7 +106,7 @@ async function getUser() {
         lastName: "",
         email: "",
         password: "",
-        donations: []
+        donations: [],
       };
     }
     const result = await response.json();
@@ -118,7 +118,7 @@ async function getUser() {
       lastName: "",
       email: "",
       password: "",
-      donations: []
+      donations: [],
     };
   }
 }
@@ -138,4 +138,28 @@ async function getUsers() {
   }
 }
 
-export { getNonprofits, getEmail, signup, login, logout, getUser, getUsers };
+async function getNonprofit(uuid) {
+  const path = `/nonprofit/get/${uuid}`;
+  const url = BASE_URL + path;
+  try {
+    const response = await fetch(url);
+    if (response.status !== 200) {
+      return null;
+    }
+    const result = await response.json();
+    return result;
+  } catch (e) {
+    return null;
+  }
+}
+
+export {
+  getNonprofits,
+  getEmail,
+  signup,
+  login,
+  logout,
+  getUser,
+  getUsers,
+  getNonprofit,
+};

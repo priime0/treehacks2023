@@ -82,3 +82,13 @@ async def get_user(email):
 @app.get("/user/all", status_code=200)
 async def get_users():
     return db["users"]
+
+@app.get("/nonprofit/get/{uuid}", status_code=200)
+async def get_nonprofit(uuid):
+    nps = [np for np in db["nonprofits"] if np["uuid"] == uuid]
+    if len(nps) == 0:
+        raise HTTPException(status_code=400, detail="Nonprofit does not exist")
+
+    nonprofit = nps[0]
+
+    return nonprofit
