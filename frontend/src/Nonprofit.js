@@ -15,7 +15,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function Nonprofit(props) {
   const navigate = useNavigate();
-  const { name, uuid, website, image, description, tags } = props.info;
+  const { name, uuid, website, description, tags } = props.info;
   const colorValue = useColorModeValue("gray.50", "gray.800");
 
   function handleRedirect() {

@@ -19,7 +19,7 @@ import {
 } from "@chakra-ui/react";
 import Navbar from "./navbar";
 import Footer from "./footer";
-import { getNonprofit } from "./api";
+import { getNonprofit, getEmail, donate } from "./api";
 import { useEffect, useState } from "react";
 
 export default function Donate() {
@@ -27,18 +27,29 @@ export default function Donate() {
 
   const [name, setName] = useState("");
   const [website, setWebsite] = useState("");
-  const [image, setImage] = useState("");
   const [description, setDescription] = useState("");
   const [tags, setTags] = useState("");
   const [donationAmount, setDonationAmount] = useState(0);
+  const email = getEmail();
   const toast = useToast();
 
-  function handleDonation() {
+  async function handleDonation() {
     if (donationAmount <= 0) {
       toast({
         title: "Donation Failed",
         description: "Please donate at least $1",
         status: "warning",
+        duration: 5000,
+        isClosable: true,
+      });
+      return;
+    }
+    const result = await donate(email, npUuid, donationAmount);
+    if (!result) {
+      toast({
+        title: "Donation Failed",
+        description: "Something failed on our end",
+        status: "error",
         duration: 5000,
         isClosable: true,
       });
@@ -61,11 +72,10 @@ export default function Donate() {
       }
       setName(nonprofit.name);
       setWebsite(nonprofit.website);
-      setImage(nonprofit.image);
       setDescription(nonprofit.description);
       setTags(nonprofit.tags);
     });
-  });
+  }, []);
 
   if (tags?.length !== 0) {
     return (
@@ -131,7 +141,10 @@ export default function Donate() {
                   </NumberInput>
                 </Flex>
               </Flex>
-              <Button colorScheme={"blue"} onClick={handleDonation}>
+              <Button
+                colorScheme={"blue"}
+                onClick={async () => await handleDonation()}
+              >
                 Donate
               </Button>
             </Stack>

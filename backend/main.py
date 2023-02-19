@@ -83,6 +83,7 @@ async def get_user(email):
 async def get_users():
     return db["users"]
 
+
 @app.get("/nonprofit/get/{uuid}", status_code=200)
 async def get_nonprofit(uuid):
     nps = [np for np in db["nonprofits"] if np["uuid"] == uuid]
@@ -92,3 +93,34 @@ async def get_nonprofit(uuid):
     nonprofit = nps[0]
 
     return nonprofit
+
+
+@app.post("/donate", status_code=200)
+async def donate(request: Request):
+    info = await request.json()
+    if "email" not in info:
+        raise HTTPException(status_code=400, detail="email key not present")
+    if "uuid" not in info:
+        raise HTTPException(status_code=400, detail="uuid key not present")
+    if "amount" not in info:
+        raise HTTPException(status_code=400, detail="amount key not present")
+
+    email = info["email"]
+    uuid = info["uuid"]
+    amount = info["amount"]
+
+    nps = [np["name"] for np in db["nonprofits"] if np["uuid"] == uuid]
+    if len(nps) == 0:
+        raise HTTPException(status_code=400, detail=f"nonprofit with uuid {uuid} not found")
+    npname = nps[0]
+
+    donations = db["users"][email]["donations"]
+    
+    donated = False
+    for i, (name, val) in enumerate(donations):
+        if name == npname:
+            donations[i] = (name, val + amount)
+    if not donated:
+        db["users"][email]["donations"].append((name, amount))
+
+    return 200
