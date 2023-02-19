@@ -1,83 +1,86 @@
 import {
-    Button,
-    Flex,
-    FormControl,
-    FormLabel,
-    Heading,
-    Input,
-    Stack,
-    useColorModeValue,
-    HStack,
-    Avatar,
-    AvatarBadge,
-    IconButton,
-    Center,
-  } from '@chakra-ui/react';
-  import { SmallCloseIcon } from '@chakra-ui/icons';
-  import { useNavigate } from 'react-router-dom';
-  
-  export default function ProfileLayout(): JSX.Element {
-    const navigate = useNavigate();
-    return (
-      <Flex
-        minH={'100vh'}
-        //minW={'100vh'}
-        align={'center'}
-        justify={'center'}
-        bg={useColorModeValue('gray.50', 'gray.800')}>
-        <Stack
-          spacing={4}
-          w={'full'}
-          maxW={'xl'}
-          bg={useColorModeValue('white', 'gray.700')}
-          rounded={'xl'}
-          boxShadow={'lg'}
-          p={6}
-          my={12}>
-          <Heading lineHeight={1.1} fontSize={{ base: '2xl', sm: '3xl' }}>
-            Your Profile
-          </Heading>
-          <FormControl id="userName">
-            <FormLabel>User Icon</FormLabel>
-            <Stack direction={['column', 'row']} spacing={6}>
-              <Center>
-                <Avatar size="xl" src="https://bit.ly/sage-adebayo">
-                </Avatar>
-              </Center>
-              <Center w="full">
-                <Button w="full">Edit Profile</Button>
-              </Center>
-            </Stack>
-          </FormControl>
-          <FormControl id="userName">
-            <FormLabel>User name</FormLabel>
-            <Input
-              placeholder="UserName"
-              _placeholder={{ color: 'gray.500' }}
-              type="text"
-            />
-          </FormControl>
-          <FormControl id="email">
-            <FormLabel>Email address</FormLabel>
-            <Input
-              placeholder="your-email@example.com"
-              _placeholder={{ color: 'gray.500' }}
-              type="email"
-            />
-          </FormControl>
-          
-          <Stack spacing={6} direction={['column', 'row']}>
-            <Button
-              bg={'red.400'}
-              color={'white'}
-              w="full"
-              onClick={() => navigate("/")}
-              _hover={{
-                bg: 'red.500',
-              }}>
-              Back
-            </Button>
-          </Stack>
+  Heading,
+  Avatar,
+  Box,
+  Center,
+  Text,
+  Stack,
+  Button,
+  Link,
+  Badge,
+  useColorModeValue,
+} from '@chakra-ui/react';
+
+export default function SocialProfileSimple() {
+  return (
+    <Center py={6}>
+      <Box
+        maxW={'320px'}
+        w={'full'}
+        bg={useColorModeValue('white', 'gray.900')}
+        boxShadow={'2xl'}
+        rounded={'lg'}
+        p={6}
+        textAlign={'center'}>
+        <Avatar
+          size={'xl'}
+          src={
+            'https://images.unsplash.com/photo-1520810627419-35e362c5dc07?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ'
+          }
+          alt={'Avatar Alt'}
+          mb={4}
+          pos={'relative'}
+          _after={{
+            content: '""',
+            w: 4,
+            h: 4,
+            bg: 'green.300',
+            border: '2px solid white',
+            rounded: 'full',
+            pos: 'absolute',
+            bottom: 0,
+            right: 3,
+          }}
+        />
+        <Heading fontSize={'2xl'} fontFamily={'body'}>
+          Ashley Adams
+        </Heading>
+        <Text fontWeight={600} color={'gray.500'} mb={4}>
+          @ashley_adams
+        </Text>
+        <Text
+          textAlign={'center'}
+          color={useColorModeValue('gray.700', 'gray.400')}
+          px={3}>
+          Actress, musician, songwriter and artist. PM for work inquires or{' '}
+          <Link href={'#'} color={'blue.400'}>
+            #tag
+          </Link>{' '}
+          me in your posts
+        </Text>
+
+        <Stack align={'center'} justify={'center'} direction={'row'} mt={6}>
+          <Badge
+            px={2}
+            py={1}
+            bg={useColorModeValue('gray.50', 'gray.800')}
+            fontWeight={'400'}>
+            #art
+          </Badge>
+          <Badge
+            px={2}
+            py={1}
+            bg={useColorModeValue('gray.50', 'gray.800')}
+            fontWeight={'400'}>
+            #photography
+          </Badge>
+          <Badge
+            px={2}
+            py={1}
+            bg={useColorModeValue('gray.50', 'gray.800')}
+            fontWeight={'400'}>
+            #music
+          </Badge>
         </Stack>
 
         <Stack mt={8} direction={'row'} spacing={4}>
