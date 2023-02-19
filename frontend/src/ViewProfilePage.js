@@ -14,8 +14,10 @@ import {
     Center,
   } from '@chakra-ui/react';
   import { SmallCloseIcon } from '@chakra-ui/icons';
+  import { useNavigate } from 'react-router-dom';
   
   export default function ViewProfilePage(): JSX.Element {
+    const navigate = useNavigate();
     return (
       <Flex
         minH={'100vh'}
@@ -75,7 +77,7 @@ import {
               bg={'red.400'}
               color={'white'}
               w="full"
-              href={'#'}
+              onClick={() => navigate("/")}
               _hover={{
                 bg: 'red.500',
               }}>

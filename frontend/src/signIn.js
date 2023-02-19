@@ -12,8 +12,10 @@ import {
   Text,
   useColorModeValue,
 } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
 
 export default function SimpleCard() {
+  const navigate = useNavigate();
   return (
     <Flex
       minH={'100vh'}
@@ -52,6 +54,7 @@ export default function SimpleCard() {
               <Button
                 bg={'blue.400'}
                 color={'white'}
+                onClick={() => navigate("/profile")}
                 _hover={{
                   bg: 'blue.500',
                 }}>
