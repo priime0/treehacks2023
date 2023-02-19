@@ -35,7 +35,6 @@ export default function ViewNonprofitsPage() {
                 .filter((nonprofit) => {
                   return (
                     nonprofit.name.toLowerCase().includes(searchTerm) ||
-                    nonprofit.website.toLowerCase().includes(searchTerm) ||
                     nonprofit.description.toLowerCase().includes(searchTerm) ||
                     nonprofit.tags
                       .map((n) => n.toLowerCase())
