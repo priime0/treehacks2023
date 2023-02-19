@@ -90,4 +90,4 @@ function logout() {
   unsetEmail();
 }
 
-export { getNonprofits, signup, login, logout };
+export { getNonprofits, getEmail, signup, login, logout };
