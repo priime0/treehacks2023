@@ -10,8 +10,10 @@ import {
   Badge,
   useColorModeValue,
 } from '@chakra-ui/react';
+import { useNavigate } from "react-router-dom";
 
 export default function SocialProfileSimple() {
+    const navigate = useNavigate();
   return (
     <Center py={6}>
       <Box
@@ -92,7 +94,7 @@ export default function SocialProfileSimple() {
             _focus={{
               bg: 'gray.200',
             }}>
-            Message
+            Back
           </Button>
           <Button
             flex={1}
@@ -100,6 +102,7 @@ export default function SocialProfileSimple() {
             rounded={'full'}
             bg={'blue.400'}
             color={'white'}
+            onClick={() => navigate("/editProfile")}
             boxShadow={
               '0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)'
             }
@@ -109,7 +112,7 @@ export default function SocialProfileSimple() {
             _focus={{
               bg: 'blue.500',
             }}>
-            Follow
+            Edit Profile
           </Button>
         </Stack>
       </Box>
