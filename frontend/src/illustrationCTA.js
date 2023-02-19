@@ -8,8 +8,10 @@ import {
   Icon,
   IconProps,
 } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
 
 export default function CallToActionWithIllustration() {
+  const navigate = useNavigate(); 
   return (
     <Container maxW={'5xl'}>
       <Stack
@@ -35,14 +37,15 @@ export default function CallToActionWithIllustration() {
             px={6}
             colorScheme={'blue'}
             bg={'blue.400'}
-            _hover={{ bg: 'blue.500' }}>
+            _hover={{ bg: 'blue.500' }} 
+            onClick={() => navigate('/view')}>
             Donate today
           </Button>
-          <Button rounded={'full'} px={6}>
+          <Button rounded={'full'} px={6} onClick={() => navigate('/about')}>
             Learn more
           </Button>
         </Stack>
-        <img style={{ width: 510.53, height: 410.74 }}src={require('./donateArt.png')} />
+        <img style={{ width: 510.53, height: 410.74 }} src={require('./donateArt.png')} />
       </Stack>
     </Container>
   );
