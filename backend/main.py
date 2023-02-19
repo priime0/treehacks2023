@@ -193,7 +193,7 @@ async def user_login(info: Request):
     if db["users"][email]["password"] != password:
         raise HTTPException(status_code=400, detail="Incorrect login!")
 
-    return {"email", email}
+    return {"email": email}
 
 
 @app.get("/user/get/{email}", status_code=200)
